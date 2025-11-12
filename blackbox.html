@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISTN - Institut Sains dan Teknologi Nasional</title>
+  <meta name="description" content="Kampus kolaborasi untuk inovasi teknologi dan pendidikan tinggi.">
+  <meta property="og:title" content="ISTN - Institut Sains dan Teknologi Nasional">
+  <meta property="og:description" content="Kampus kolaborasi untuk inovasi teknologi dan pendidikan tinggi.">
+  <meta property="og:url" content="https://istn.ac.id">
+  <link rel="icon" href="/assets/favicon.ico">
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom styles for prefers-reduced-motion -->
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    /* Focus rings for accessibility */
+    .focus-ring:focus { outline: 2px solid #3b82f6; outline-offset: 2px; }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 font-sans">
+  <!-- Skip to content link for accessibility -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-600 text-white p-2 z-50">Lewati ke konten utama</a>
+
+  <!-- Top Bar -->
+  <div class="bg-blue-600 text-white py-2">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-sm">
+      <span>ISTN - Institut Sains dan Teknologi Nasional</span>
+      <span>Kampus kolaborasi untuk inovasi teknologi dan pendidikan tinggi.</span>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="bg-white shadow sticky top-0 z-40" role="banner">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex justify-between items-center py-4" role="navigation" aria-label="Main navigation">
+        <a href="#home" class="text-2xl font-bold text-gray-900">ISTN</a>
+        <ul class="hidden md:flex space-x-6">
+          <li><a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors">Beranda</a></li>
+          <li><a href="#programs" class="text-gray-700 hover:text-blue-600 transition-colors">Program Studi</a></li>
+          <li><a href="#scholarships" class="text-gray-700 hover:text-blue-600 transition-colors">Beasiswa</a></li>
+          <li><a href="#careers" class="text-gray-700 hover:text-blue-600 transition-colors">Karir</a></li>
+          <li><a href="#register" class="text-gray-700 hover:text-blue-600 transition-colors">Daftar</a></li>
+          <li><a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors">Tentang Kami</a></li>
+          <li><a href="#alumni" class="text-gray-700 hover:text-blue-600 transition-colors">Alumni</a></li>
+          <li><a href="#news" class="text-gray-700 hover:text-blue-600 transition-colors">Berita</a></li>
+          <li><a href="#partners" class="text-gray-700 hover:text-blue-600 transition-colors">Kolaborasi Strategis</a></li>
+          <li><a href="#tdc" class="text-gray-700 hover:text-blue-600 transition-colors">TDC</a></li>
+          <li><a href="#student-life" class="text-gray-700 hover:text-blue-600 transition-colors">Kemahasiswaan</a></li>
+          <li><a href="#annual-report" class="text-gray-700 hover:text-blue-600 transition-colors">Laporan Tahunan</a></li>
+          <li><a href="#internal-apps" class="text-gray-700 hover:text-blue-600 transition-colors">Aplikasi Internal</a></li>
+          <li><a href="#calendar" class="text-gray-700 hover:text-blue-600 transition-colors">Kalender Akademik</a></li>
+        </ul>
+        <!-- Mobile menu button - simplified -->
+        <button class="md:hidden focus-ring" aria-label="Toggle menu" onclick="toggleMobileMenu()">☰</button>
+        <ul id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 space-y-2">
+          <li><a href="#home" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Beranda</a></li>
+          <!-- Add other links similarly for brevity -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-20" role="banner">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">Selamat Datang di ISTN</h1>
+      <p class="text-xl mb-8">Mendorong Inovasi Teknologi untuk Masa Depan</p>
+      <p class="text-lg mb-8">ISTN adalah kampus kolaborasi yang fokus pada inovasi teknologi, pendidikan tinggi berkualitas, dan kemitraan dengan industri untuk membangun masa depan yang lebih baik.</p>
+      <a href="#about" class="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-colors focus-ring">Pelajari Lebih Lanjut</a>
+    </div>
+  </section>
+
+  <main id="main" role="main">
+    <!-- Programs -->
+    <section id="programs" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Program Studi</h2>
+          <p class="mt-4 text-lg text-gray-600">Jelajahi berbagai program akademik kami</p>
+        </div>
+        <div class="flex justify-center mb-8">
+          <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+            <button onclick="setActiveTab(0)" class="px-4 py-2 text-sm font-medium rounded-md transition-colors bg-white text-gray-900 shadow">S1</button>
+            <button onclick="setActiveTab(1)" class="px-4 py-2 text-sm font-medium rounded-md transition-colors text-gray-600 hover:text-gray-900">S2</button>
+            <button onclick="setActiveTab(2)" class="px-4 py-2 text-sm font-medium rounded-md transition-colors text-gray-600 hover:text-gray-900">Profesi</button>
+            <button onclick="setActiveTab(3)" class="px-4 py-2 text-sm font-medium rounded-md transition-colors text-gray-600 hover:text-gray-900">RPL</button>
+          </div>
+        </div>
+        <div id="program-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Content will be populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- News/Highlights -->
+    <section id="news" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Berita & Sorotan</h2>
+        </div>
+        <div id="news-carousel" class="relative overflow-hidden rounded-2xl shadow-lg bg-white p-6">
+          <!-- Carousel content populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners/Collaboration -->
+    <section id="partners" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">ISTN Kampus Kolaborasi: ISTN x Industri</h2>
+          <p class="mt-4 text-lg text-gray-600">ISTN bekerja sama dengan berbagai perusahaan dan institusi untuk memberikan pengalaman praktis dan inovasi bersama.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="p-4 bg-gray-100 rounded-lg">
+            <p class="font-semibold">Partner 1</p>
+            <p class="text-sm text-gray-600">Kolaborasi dalam teknologi informasi.</p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg">
+            <p class="font-semibold">Partner 2</p>
+            <p class="text-sm text-gray-600">Fokus pada energi terbarukan.</p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg">
+            <p class="font-semibold">Partner 3</p>
+            <p class="text-sm text-gray-600">Pengembangan infrastruktur.</p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg">
+            <p class="font-semibold">Partner 4</p>
+            <p class="text-sm text-gray-600">Inovasi dalam kesehatan digital.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alumni Highlights -->
+    <section id="alumni" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Sorotan Alumni</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-2xl shadow-md p-6">
+            <h3 class="text-xl font-semibold mb-2">Dr. Ir. Afrianyah Noor</h3>
+            <p class="text-gray-600">Alumni Teknik Informatika, kini CEO di perusahaan teknologi. Beliau telah berkontribusi dalam pengembangan aplikasi inovatif yang digunakan secara global.</p>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-6">
+            <h3 class="text-xl font-semibold mb-2">Prof. Budi Santoso</h3>
+            <p class="text-gray-600">Alumni Teknik Elektro, peneliti terkemuka di energi terbarukan. Karyanya telah memajukan teknologi panel surya dan baterai berkelanjutan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Media -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Ikuti Kami di Media Sosial</h2>
+          <p class="mt-4 text-lg text-gray-600">Dapatkan update terbaru tentang kegiatan, berita, dan inovasi ISTN melalui platform sosial kami.</p>
+        </div>
+        <div class="flex justify-center space-x-6">
+          <a href="#" class="text-2xl hover:text-blue-600 focus-ring" aria-label="Follow us on Facebook">Facebook</a>
+          <a href="#" class="text-2xl hover:text-blue-600 focus-ring" aria-label="Follow us on Twitter">Twitter</a>
+          <a href="#" class="text-2xl hover:text-blue-600 focus-ring" aria-label="Follow us on Instagram">Instagram</a>
+          <a href="#" class="text-2xl hover:text-blue-600 focus-ring" aria-label="Follow us on LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Podcast/Radio Teaser -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Podcast ISTN: Inovasi Teknologi</h2>
+          <p class="mt-4 text-lg text-gray-600">Dengarkan episode terbaru tentang tren teknologi, wawasan dari ahli, dan cerita sukses mahasiswa ISTN.</p>
+        </div>
+        <div class="text-center">
+          <a href="#" class="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-colors focus-ring">Dengarkan Sekarang</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Campus Info -->
+    <section id="about" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Tentang Kami</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-2xl font-semibold mb-4">Visi</h3>
+            <p>Menjadi universitas terdepan dalam inovasi teknologi dan pendidikan berkualitas.</p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold mb-4">Misi</h3>
+            <p>Menyediakan pendidikan tinggi yang relevan, mendorong penelitian, dan berkolaborasi dengan industri.</p>
+          </div>
+        </div>
+        <div class="mt-8">
+          <h3 class="text-2xl font-semibold mb-4">Alamat Kampus</h3>
+          <p>Jl. Teknologi No. 1, Jakarta, Indonesia</p>
+          <p class="mt-2 text-gray-600">Kampus utama ISTN terletak di pusat kota Jakarta, mudah diakses dengan transportasi umum. Fasilitas modern termasuk laboratorium canggih, perpustakaan digital, dan ruang kuliah interaktif.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Academic Calendar CTA -->
+    <section id="calendar" class="py-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-lg mb-4">Jangan lewatkan jadwal penting akademik kami.</p>
+        <a href="#calendar" class="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-colors focus-ring">Lihat Kalender Akademik</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12" role="contentinfo">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <a href="#home" class="hover:text-gray-300">Beranda</a>
+        <a href="#programs" class="hover:text-gray-300">Program Studi</a>
+        <a href="#scholarships" class="hover:text-gray-300">Beasiswa</a>
+        <a href="#careers" class="hover:text-gray-300">Karir</a>
+      </div>
+      <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+        <p>© 2023 ISTN. Semua hak dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript for interactivity -->
+  <script>
+    // Data object
+    const siteData = {
+      programs: {
+        s1: [
+          { name: "Teknik Informatika", desc: "Program sarjana untuk pengembangan perangkat lunak dan sistem informasi." },
+          { name: "Teknik Elektro", desc: "Fokus pada elektronika, telekomunikasi, dan energi terbarukan." },
+          { name: "Teknik Sipil", desc: "Mempelajari konstruksi, struktur, dan infrastruktur." }
+        ],
+        s2: [
+          { name: "Magister Teknik Informatika", desc: "Program magister untuk penelitian lanjutan dalam TI." },
+          { name: "Magister Teknik Elektro", desc: "Spesialisasi dalam sistem cerdas dan energi." }
+        ],
+        profesi: [
+          { name: "Profesi Insinyur", desc: "Sertifikasi profesi untuk insinyur terakreditasi." }
+        ],
+        rpl: [
+          { name: "Rekognisi Pembelajaran Lampau", desc: "Program untuk mengakui pengalaman kerja sebagai kredit akademik." }
+        ]
+      },
+      news: [
+        { title: "Rektor ISTN Lakukan Kunjungan ke ITB", desc: "Kunjungan untuk memperkuat kolaborasi pendidikan." },
+        { title: "

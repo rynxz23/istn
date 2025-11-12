@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Institut Sains & Teknologi — Demo</title>
+  <meta name="description" content="Situs resmi kampus modern — akses program studi, berita, kolaborasi, dan kalender akademik." />
+  <!-- Open Graph (ganti og:image sebelum publish) -->
+  <meta property="og:title" content="Institut Sains & Teknologi — Demo" />
+  <meta property="og:description" content="Situs resmi kampus modern — akses program studi, berita, kolaborasi, dan kalender akademik." />
+  <meta property="og:type" content="website" />
+  <!-- TODO: replace with real image -->
+  <meta property="og:image" content="/assets/placeholder-og.jpg" />
+
+  <!-- Tailwind Play CDN for demo. Replace with compiled Tailwind in production. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Additional accessibility & visual tweaks */
+    :root { --accent-from: #0066FF; --accent-to: #7C3AED; }
+    .focus-ring { outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,0.25); border-radius: .5rem; }
+
+    /* prefer-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+    }
+
+    /* Small utility for sr-only visible on focus (skip link) */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .sr-only:focus, .sr-only:active { position: static; width: auto; height: auto; margin: 0; clip: auto; white-space: normal; background: white; padding: .5rem; border-radius: .375rem; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+
+    /* Carousel transition */
+    .carousel-track { transition: transform 700ms cubic-bezier(.2,.9,.2,1); white-space: nowrap; }
+    .carousel-slide { display: inline-block; width: 100%; vertical-align: top; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <!-- Skip to content -->
+  <a class="sr-only" href="#main">Lewati ke konten</a>
+
+  <!-- DATA: edit only within SITE_DATA for content changes -->
+  <script>
+    // All textual content kept in SITE_DATA for easy edits / i18n
+    const SITE_DATA = {
+      siteName: 'Institut Sains & Teknologi (Placeholder)',
+      navLinks: ['Beranda','Program Studi','Beasiswa','Karir','Daftar','Tentang Kami','Alumni','Berita','Kolaborasi Strategis','TDC','Kemahasiswaan','Laporan Tahunan','Aplikasi Internal','Kalender Akademik'],
+      hero: {
+        title: 'Membentuk Pemimpin Teknologi dan Riset Berkelas',
+        subtitle: 'Arahkan masa depan Anda menuju kedaulatan digital, penelitian, dan kolaborasi industri.',
+        ctas: [{label: 'Daftar Sekarang', href: '#daftar'}, {label: 'Kalender Akademik', href: '#kalender'}],
+        image: '/assets/placeholder-hero.jpg' // TODO: replace with campus hero image
+      },
+      programs: {
+        tabs: ['S1','S2','Profesi','RPL'],
+        items: {
+          S1: ['Teknik Informatika','Sistem Informasi','Teknik Elektro','Teknik Biomedis'],
+          S2: ['Magister Teknologi Informasi','Magister Rekayasa Sistem'],
+          Profesi: ['Profesi Insinyur','Profesi Keamanan Informasi'],
+          RPL: ['Rekognisi Pembelajaran Lampau (RPL) — Teknologi & Manajemen']
+        }
+      },
+      news: [
+        {title: 'Rektor ISTN Lakukan Kunjungan ke ITB dan Perkuat Kolaborasi Riset', date: '2025-10-01'},
+        {title: 'ISTN Dorong Kedaulatan Digital Kesehatan melalui Inovasi Data', date: '2025-09-20'},
+        {title: 'ISTN Buka Peluang Magang di Jepang untuk Mahasiswa Teknik', date: '2025-08-15'}
+      ],
+      partners: ['partner-a','partner-b','partner-c','partner-d','partner-e','partner-f'],
+      alumni: [
+        {name: 'Dr. Ir. Afrianyah Noor', role: 'Alumni, Peneliti AI', blurb: 'Pemimpin riset kecerdasan buatan pada sektor kesehatan.'},
+        {name: 'Dr. Budi Santoso', role: 'Alumni, CTO Industri X', blurb: 'Mendorong transformasi digital skala nasional.'}
+      ],
+      about: {
+        visi: 'Menjadi institusi terdepan dalam riset dan pendidikan teknologi untuk kemajuan bangsa.',
+        misi: ['Menyelenggarakan pendidikan vokasi dan akademik yang unggul.','Mengembangkan riset terapan berorientasi industri dan publik.','Membangun jejaring kolaborasi nasional dan internasional.'],
+        alamat: 'Jalan Contoh No.123, Kota Contoh, Indonesia — Kampus Placeholder'
+      }
+    };
+  </script>
+
+  <!-- Header -->
+  <header id="site-header" class="sticky top-0 z-40 backdrop-blur-sm transition-all">
+    <div class="border-b border-transparent">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between py-3">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2">
+              <!-- TODO: replace with real logo SVG -->
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold" aria-hidden>ISTN</div>
+              <span class="sr-only">Logo Institut</span>
+            </div>
+            <div>
+              <a href="#" class="text-lg font-semibold text-slate-800 no-underline" aria-label="Beranda">{/* name replaced by JS below */}</a>
+              <p class="text-xs text-slate-500">Kampus Kolaborasi: ISTN x Industri</p>
+            </div>
+          </div>
+
+          <!-- Desktop nav -->
+          <nav id="desktop-nav" aria-label="Utama" class="hidden lg:flex lg:items-center lg:gap-4" role="navigation"></nav>
+
+          <!-- Mobile menu -->
+          <div class="lg:hidden relative">
+            <button id="mobile-menu-button" aria-expanded="false" aria-controls="mobile-menu" class="p-2 rounded focus:outline-none focus-visible:ring-2">
+              <span class="sr-only">Buka menu</span>
+              <!-- simple hamburger -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <div id="mobile-menu" class="hidden absolute right-4 mt-2 w-64 bg-white rounded-lg shadow-lg border border-slate-100 p-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main id="main" tabindex="-1">
+    <!-- Hero -->
+    <section aria-label="Hero" class="pt-8 pb-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-medium">Program Unggulan</div>
+            <h1 id="hero-title" class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight"></h1>
+            <p id="hero-sub" class="mt-4 text-lg text-slate-600 max-w-xl"></p>
+
+            <div class="mt-6 flex gap-3" id="hero-ctas"></div>
+
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
+                <h4 class="text-sm font-semibold">Statistik Cepat</h4>
+                <p class="text-xs text-slate-500 mt-1">Fakultas: 4 • Program: 10+ • Kolaborasi Industri: 30+</p>
+              </div>
+              <div class="p-4 rounded-xl bg-white border border-slate-100 shadow-sm">
+                <h4 class="text-sm font-semibold">Akses & Beasiswa</h4>
+                <p class="text-xs text-slate-500 mt-1">Informasi beasiswa diperbarui setiap semester. Lihat halaman Beasiswa.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-first lg:order-last">
+            <div class="rounded-2xl overflow-hidden shadow-lg">
+              <img id="hero-image" src="https://kelaskaryawan.org/wp-content/uploads/2024/05/Capture1-678x381.jpg" alt="Gambar kampus" loading="lazy" class="w-full h-64 object-cover"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs -->
+    <section id="program-studi" class="py-8 sm:py-12 lg:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-slate-500">Program Studi</p>
+            <h2 class="text-2xl sm:text-3xl font-semibold leading-tight">Program Studi & Layanan</h2>
+            <p class="text-sm text-slate-500 mt-1">Pilih jenjang untuk melihat daftar program studi yang tersedia.</p>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <div id="program-tabs" class="bg-white shadow-sm rounded-2xl p-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News / Highlights -->
+    <section id="berita" class="py-8 sm:py-12 lg:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-slate-500">Berita & Highlights</p>
+            <h2 class="text-2xl sm:text-3xl font-semibold leading-tight">Informasi Terbaru</h2>
+            <p class="text-sm text-slate-500 mt-1">Berita kampus, pengumuman, dan pencapaian.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2">
+            <div class="relative">
+              <div class="overflow-hidden rounded-2xl bg-white shadow-sm">
+                <div id="news-carousel" class="carousel-track"></div>
+              </div>
+              <div class="absolute inset-y-0 left-0 flex items-center">
+                <button id="carousel-prev" aria-label="Previous" class="p-2 m-2 rounded-full bg-white/80 backdrop-blur-sm shadow focus:outline-none focus-visible:ring-2">‹</button>
+              </div>
+              <div class="absolute inset-y-0 right-0 flex items-center">
+                <button id="carousel-next" aria-label="Next" class="p-2 m-2 rounded-full bg-white/80 backdrop-blur-sm shadow focus:outline-none focus-visible:ring-2">›</button>
+              </div>
+              <div id="carousel-dots" class="flex justify-center gap-2 mt-3 p-3"></div>
+            </div>
+          </div>
+
+          <aside class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+            <h3 class="font-semibold">Highlights</h3>
+            <ul id="news-list" class="mt-3 space-y-3 text-sm text-slate-600"></ul>
+
+            <div class="mt-4">
+              <article class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
+                <h4 class="font-semibold">Podcast & Radio</h4>
+                <p class="text-sm text-slate-600 mt-2">Dengarkan episode terbaru wawancara alumni dan topik riset di kanal podcast kampus.</p>
+              </article>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners -->
+    <section id="kolaborasi" class="py-8 sm:py-12 lg:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div>
+          <p class="text-sm text-slate-500">Kolaborasi</p>
+          <h2 class="text-2xl sm:text-3xl font-semibold leading-tight">Kolaborasi Strategis & Industri</h2>
+          <p class="text-sm text-slate-500 mt-1">ISTN Kampus Kolaborasi: ISTN x Industri. Jalinan dengan mitra strategis yang mendukung riset dan magang.</p>
+        </div>
+
+        <div class="mt-6 grid grid-cols-3 sm:grid-cols-6 gap-4 items-center" id="partners-grid"></div>
+      </div>
+    </section>
+
+    <!-- Alumni -->
+    <section id="alumni" class="py-8 sm:py-12 lg:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div>
+          <p class="text-sm text-slate-500">Alumni</p>
+          <h2 class="text-2xl sm:text-3xl font-semibold leading-tight">Sorotan Alumni</h2>
+          <p class="text-sm text-slate-500 mt-1">Kisah sukses alumni di industri dan akademia.</p>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="alumni-grid"></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="tentang" class="py-8 sm:py-12 lg:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div>
+          <p class="text-sm text-slate-500">Tentang Kami</p>
+          <h2 class="text-2xl sm:text-3xl font-semibold leading-tight">Visi, Misi & Alamat Kampus</h2>
+          <p class="text-sm text-slate-500 mt-1">Informasi singkat tentang identitas institusi.</p>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+            <h3 class="font-semibold">Visi</h3>
+            <p id="about-visi" class="mt-2 text-slate-600"></p>
+
+            <h3 class="mt-4 font-semibold">Misi</h3>
+            <ul id="about-misi" class="list-disc list-inside mt-2 text-slate-600"></ul>
+          </div>
+
+          <aside class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+            <h4 class="font-semibold">Alamat Kampus</h4>
+            <address id="about-alamat" class="not-italic mt-2 text-sm text-slate-600"></address>
+
+            <div class="mt-4">
+              <h5 class="font-medium">Kontak</h5>
+              <p class="text-sm text-slate-600 mt-1">Email: info@istn.example • Telepon: (021) 0000-000</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl p-6 shadow-lg">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h3 class="text-lg font-semibold">Butuh informasi lebih lanjut?</h3>
+              <p class="text-sm opacity-90">Hubungi layanan informasi atau kunjungi halaman pendaftaran untuk langkah selanjutnya.</p>
+            </div>
+            <div class="flex gap-3">
+              <a href="#daftar" class="inline-flex items-center px-4 py-2 bg-white text-blue-600 rounded-lg font-medium focus:outline-none focus-visible:ring-2">Daftar</a>
+              <a href="#kontak" class="inline-flex items-center px-4 py-2 border border-white/30 rounded-lg font-medium focus:outline-none focus-visible:ring-2">Hubungi</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 bg-white border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h4 id="footer-name" class="font-semibold"></h4>
+        <p class="text-sm text-slate-600 mt-2" id="footer-visi"></p>
+      </div>
+      <div>
+        <h5 class="font-medium">Link Cepat</h5>
+        <ul id="footer-links" class="mt-2 text-sm text-slate-600 space-y-1"></ul>
+      </div>
+      <div>
+        <h5 class="font-medium">Sosial Media</h5>
+        <p class="text-sm text-slate-600 mt-2">Ikuti kami di kanal resmi untuk pembaruan dan acara kampus.</p>
+      </div>
+    </div>
+
+    <div class="py-4 text-xs text-slate-400 text-center">© <span id="year"></span> <span id="company"></span>. Semua hak dilindungi.</div>
+  </footer>
+
+  <!-- Scripts: render dynamic content, interactivity -->
+  <script>
+    /* Utility: slugify */
+    function slugify(text) {
+      return String(text).toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+    }
+
+    /* Render header name & desktop nav */
+    document.querySelectorAll('[aria-label="Beranda"]').forEach(el => el.textContent = SITE_DATA.siteName);
+    document.getElementById('footer-name').textContent = SITE_DATA.siteName;
+    document.getElementById('footer-visi').textContent = SITE_DATA.about.visi;
+    document.getElementById('company').textContent = SITE_DATA.siteName;
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Desktop nav
+    const desktopNav = document.getElementById('desktop-nav');
+    SITE_DATA.navLinks.slice(0,8).forEach(link => {
+      const a = document.createElement('a');
+      a.href = '#' + slugify(link);
+      a.className = 'text-sm text-slate-600 hover:text-slate-900 focus:outline-none focus-visible:ring-2 px-2 py-1 rounded';
+      a.textContent = link;
+      desktopNav.appendChild(a);
+    });
+    const daftarBtn = document.createElement('a');
+    daftarBtn.href = '#daftar';
+    daftarBtn.className = 'ml-3 inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium';
+    daftarBtn.textContent = 'Daftar';
+    desktopNav.appendChild(daftarBtn);
+
+    /* Mobile menu rendering */
+    const mobileMenu = document.getElementById('mobile-menu');
+    SITE_DATA.navLinks.forEach(l => {
+      const li = document.createElement('div');
+      const a = document.createElement('a');
+      a.href = '#' + slugify(l);
+      a.className = 'block px-2 py-1 rounded focus-visible:ring-2';
+      a.textContent = l;
+      a.addEventListener('click', () => {
+        toggleMobileMenu(false);
+      });
+      li.appendChild(a);
+      mobileMenu.appendChild(li);
+    });
+
+    function toggleMobileMenu(state) {
+      const btn = document.getElementById('mobile-menu-button');
+      if (state === undefined) state = mobileMenu.classList.contains('hidden');
+      btn.setAttribute('aria-expanded', state ? 'true' : 'false');
+      mobileMenu.classList.toggle('hidden', !state);
+    }
+    document.getElementById('mobile-menu-button').addEventListener('click', () => toggleMobileMenu());
+
+    /* Hero content */
+    document.getElementById('hero-title').textContent = SITE_DATA.hero.title;
+    document.getElementById('hero-sub').textContent = SITE_DATA.hero.subtitle;
+    const heroImg = document.getElementById('hero-image');
+    heroImg.src = SITE_DATA.hero.image;
+    heroImg.alt = 'Gambar kampus - placeholder';
+
+    const heroCtas = document.getElementById('hero-ctas');
+    SITE_DATA.hero.ctas.forEach(c => {
+      const a = document.createElement('a');
+      a.href = c.href;
+      a.className = 'inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold focus:outline-none focus-visible:ring-2';
+      a.style.background = 'linear-gradient(90deg,var(--accent-from) 0%, var(--accent-to) 100%)';
+      a.style.color = '#fff';
+      a.textContent = c.label;
+      heroCtas.appendChild(a);
+    });
+
+    /* Programs: tabs */
+    (function renderPrograms() {
+      const container = document.getElementById('program-tabs');
+      const tabs = SITE_DATA.programs.tabs;
+      const items = SITE_DATA.programs.items;
+      // tabs header
+      const header = document.createElement('div');
+      header.className = 'flex gap-2 overflow-auto pb-2';
+      tabs.forEach((t, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'px-3 py-1 rounded-full text-sm font-medium focus:outline-none focus-visible:ring-2 bg-slate-50';
+        btn.textContent = t;
+        btn.dataset.tab = t;
+        if (idx === 0) btn.classList.add('bg-gradient-to-r', 'from-blue-50', 'to-purple-50', 'ring-1', 'ring-inset', 'ring-slate-100');
+        header.appendChild(btn);
+      });
+      container.appendChild(header);
+
+      const grid = document.createElement('div');
+      grid.className = 'mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4';
+      container.appendChild(grid);
+
+      function renderTab(tab) {
+        grid.innerHTML = '';
+        items[tab].forEach((prog) => {
+          const art = document.createElement('article');
+          art.className = 'p-4 rounded-xl border border-slate-100 shadow-sm bg-white';
+          art.tabIndex = 0;
+          art.setAttribute('aria-label', `Program ${prog}`);
+          const h3 = document.createElement('h3'); h3.className = 'font-semibold'; h3.textContent = prog;
+          const p = document.createElement('p'); p.className = 'text-sm text-slate-500 mt-1';
+          p.textContent = `Deskripsi singkat program studi ${prog} — kurikulum modern, peluang riset dan magang industri.`;
+          art.appendChild(h3); art.appendChild(p);
+          grid.appendChild(art);
+        });
+      }
+      // initial render
+      renderTab(tabs[0]);
+
+      // event delegation for tab clicks
+      header.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        header.querySelectorAll('button').forEach(b => { b.classList.remove('bg-gradient-to-r','from-blue-50','to-purple-50','ring-1','ring-inset','ring-slate-100'); b.classList.add('bg-slate-50');});
+        btn.classList.remove('bg-slate-50');
+        btn.classList.add('bg-gradient-to-r','from-blue-50','to-purple-50','ring-1','ring-inset','ring-slate-100');
+        renderTab(btn.dataset.tab);
+      });
+    })();
+
+    /* News carousel */
+    (function newsCarousel() {
+      const carousel = document.getElementById('news-carousel');
+      const dots = document.getElementById('carousel-dots');
+      const prev = document.getElementById('carousel-prev');
+      const next = document.getElementById('carousel-next');
+      const list = SITE_DATA.news.map(n => ({
+        title: n.title,
+        body: `Per tanggal ${n.date}. Baca selengkapnya di laman berita kampus.`,
+        image: '/assets/placeholder-card.jpg',
+        imageAlt: n.title,
+        cta: {label:'Baca Berita', href:'#berita'}
+      }));
+
+      // build slides
+      list.forEach((it) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.innerHTML = `
+          <div class="p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+              <div class="md:col-span-2">
+                <h3 class="text-xl font-semibold">${it.title}</h3>
+                <p class="mt-2 text-slate-600">${it.body}</p>
+                <a href="${it.cta.href}" class="inline-block mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white focus:outline-none focus-visible:ring-2">${it.cta.label}</a>
+              </div>
+              <div class="md:col-span-1">
+                <img src="${it.image}" alt="${escapeHtml(it.imageAlt)}" loading="lazy" class="w-full rounded-lg shadow-md" />
+              </div>
+            </div>
+          </div>
+        `;
+        carousel.appendChild(slide);
+      });
+
+      // dots & list on side
+      const newsList = document.getElementById('news-list');
+      SITE_DATA.news.forEach((n, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#berita-${i}" class="block focus:outline-none focus-visible:ring-2 rounded px-2 py-1">${escapeHtml(n.title)}<span class="text-xs text-slate-400 block">${n.date}</span></a>`;
+        newsList.appendChild(li);
+      });
+
+      // carousel mechanics
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      let idx = 0, interval = 6000, timer = null;
+      function update() {
+        carousel.style.transform = `translateX(-${idx * 100}%)`;
+        dots.querySelectorAll('button').forEach((b,i)=> b.classList.toggle('bg-blue-600', i === idx));
+      }
+      // build dots
+      list.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.className = (i===0 ? 'w-3 h-3 rounded-full focus:outline-none bg-blue-600' : 'w-3 h-3 rounded-full focus:outline-none bg-slate-300');
+        b.setAttribute('aria-label', `Goto slide ${i+1}`);
+        b.addEventListener('click', ()=> { idx = i; resetTimer(); update(); });
+        dots.appendChild(b);
+      });
+
+      function resetTimer() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(()=> { idx = (idx+1) % slides.length; update(); }, interval);
+      }
+      document.getElementById('carousel-prev').addEventListener('click', ()=> { idx = (idx-1 + slides.length) % slides.length; resetTimer(); update(); });
+      document.getElementById('carousel-next').addEventListener('click', ()=> { idx = (idx+1) % slides.length; resetTimer(); update(); });
+
+      // keyboard navigation when focus inside news carousel container
+      document.addEventListener('keydown', (e) => {
+        const active = document.activeElement;
+        const container = carousel.parentElement;
+        if (container.contains(active)) {
+          if (e.key === 'ArrowLeft') { idx = (idx-1 + slides.length) % slides.length; resetTimer(); update(); }
+          if (e.key === 'ArrowRight') { idx = (idx+1) % slides.length; resetTimer(); update(); }
+        }
+      });
+
+      // init
+      resetTimer();
+      update();
+    })();
+
+    /* Partners & Alumni rendering */
+    (function renderPartnersAndAlumni() {
+      const partnersGrid = document.getElementById('partners-grid');
+      SITE_DATA.partners.forEach(id => {
+        const d = document.createElement('div');
+        d.className = 'p-3 bg-white rounded-lg shadow-sm flex items-center justify-center';
+        d.setAttribute('aria-hidden', 'true');
+        d.innerHTML = `<div class="text-xs text-slate-400">Logo ${escapeHtml(id)}</div>`; // TODO: replace with real <img>
+        partnersGrid.appendChild(d);
+      });
+
+      const alumniGrid = document.getElementById('alumni-grid');
+      SITE_DATA.alumni.forEach(a => {
+        const card = document.createElement('article');
+        card.className = 'bg-white rounded-2xl shadow-sm overflow-hidden border border-slate-100';
+        card.innerHTML = `
+          <img src="/assets/placeholder-card.jpg" alt="${escapeHtml(a.name)}" loading="lazy" class="w-full h-40 object-cover" />
+          <div class="p-4">
+            <h4 class="font-semibold">${escapeHtml(a.name)}</h4>
+            <div class="text-xs text-slate-500 mt-1">${escapeHtml(a.role)}</div>
+            <p class="mt-2 text-sm text-slate-600">${escapeHtml(a.blurb)}</p>
+          </div>
+        `;
+        alumniGrid.appendChild(card);
+      });
+    })();
+
+    /* About content */
+    document.getElementById('about-visi').textContent = SITE_DATA.about.visi;
+    const misiList = document.getElementById('about-misi');
+    SITE_DATA.about.misi.forEach(m => {
+      const li = document.createElement('li'); li.textContent = m; misiList.appendChild(li);
+    });
+    document.getElementById('about-alamat').textContent = SITE_DATA.about.alamat;
+
+    /* Footer quick links */
+    const footerLinks = document.getElementById('footer-links');
+    SITE_DATA.navLinks.slice(0,6).forEach(n => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + slugify(n);
+      a.className = 'focus:outline-none focus-visible:ring-2';
+      a.textContent = n;
+      li.appendChild(a);
+      footerLinks.appendChild(li);
+    });
+
+    /* Escape helper to avoid simple XSS when injecting into DOM as HTML */
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, function (s) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]);
+      });
+    }
+
+    /* TODOs and notes (also visible in code):
+       - Replace placeholder images under /assets/placeholder-*.jpg with real assets
+       - Replace partner logo placeholders with <img> elements (SVG preferred)
+       - Hook up real routes (e.g., halaman pendaftaran, kalender akademik, aplikasi internal)
+       - For production, build Tailwind CSS with Purge/Content to remove unused classes
+       - Consider server-side rendering for SEO (or prerender critical pages)
+    */
+  </script>
+</body>
+</html>

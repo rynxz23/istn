@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institut Sains & Teknologi Modern</title>
+    <meta name="description" content="Situs resmi Institut Sains & Teknologi Modern. Kampus unggulan di bidang Sains, Teknologi, dan Inovasi.">
+    <meta property="og:title" content="Institut Sains & Teknologi Modern">
+    <meta property="og:description" content="Situs resmi Institut Sains & Teknologi Modern. Kampus unggulan di bidang Sains, Teknologi, dan Inovasi.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://placehold.co/1200x630"> 
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* General Accessibility & Style Overrides */
+        :root {
+            scroll-behavior: smooth;
+        }
+        /* Respect prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            :root {
+                scroll-behavior: auto;
+            }
+            .reduce-motion-only {
+                transition: none !important;
+            }
+        }
+        /* Skip-to-Content Link visibility */
+        .skip-link:focus {
+            clip: auto;
+            height: auto;
+            margin: auto;
+            width: auto;
+            position: absolute;
+            z-index: 9999;
+        }
+        /* Custom Focus Ring for all focusable elements */
+        *:focus-visible {
+            outline: 3px solid theme('colors.indigo.500');
+            outline-offset: 2px;
+            border-radius: theme('borderRadius.DEFAULT');
+        }
+        /* Hide element visually but keep accessible */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased bg-white text-gray-700">
+
+    <script>
+        const siteData = {
+            topBarInfo: { email: 'info@istmodern.ac.id', phone: '(021) 1234 5678' },
+            navLinks: [
+                { id: 'beranda', label: 'Beranda', href: '#beranda' },
+                { id: 'program-studi', label: 'Program Studi', href: '#program-studi' },
+                { id: 'beasiswa', label: 'Beasiswa', href: '##', isExternal: true },
+                { id: 'karir', label: 'Karir', href: '##', isExternal: true },
+                { id: 'daftar', label: 'Daftar', href: '##', isExternal: true, isCTA: true },
+                { id: 'tentang-kami', label: 'Tentang Kami', href: '#tentang-kami' },
+                { id: 'alumni', label: 'Alumni', href: '#alumni' },
+                { id: 'berita', label: 'Berita', href: '#berita' },
+                { id: 'kolaborasi-strategis', label: 'Kolaborasi Strategis', href: '#kolaborasi-strategis' },
+                { id: 'tdc', label: 'TDC', href: '##', isExternal: true },
+                { id: 'kemahasiswaan', label: 'Kemahasiswaan', href: '##', isExternal: true },
+                { id: 'laporan-tahunan', label: 'Laporan Tahunan', href: '##', isExternal: true },
+                { id: 'aplikasi-internal', label: 'Aplikasi Internal', href: '##', isExternal: true },
+                { id: 'kalender-akademik', label: 'Kalender Akademik', href: '##', isExternal: true },
+            ],
+            hero: {
+                headline: 'Mencetak Insinyur dan Saintis Unggul Masa Depan',
+                subtitle: 'Wujudkan potensi Anda di kampus yang berfokus pada <strong>inovasi, teknologi, dan keberlanjutan.</strong>',
+                ctaPrimary: { label: 'Daftar Sekarang', href: '##' },
+                ctaSecondary: { label: 'Jelajahi Program Studi', href: '#program-studi' },
+                imageAlt: 'Gedung kampus modern dengan arsitektur futuristik di tengah taman hijau.',
+            },
+            programs: {
+                heading: 'Program Studi Modern & Relevan',
+                tabs: [
+                    { id: 's1', label: 'Sarjana (S1)', programs: [
+                        { name: 'Teknik Sipil', description: 'Fokus pada infrastruktur berkelanjutan dan mitigasi bencana.' },
+                        { name: 'Teknik Elektro', description: 'Pengembangan sistem energi terbarukan dan otomasi industri.' },
+                        { name: 'Teknik Mesin', description: 'Perancangan dan manufaktur presisi berbasis digital.' },
+                        { name: 'Arsitektur', description: 'Desain bangunan cerdas, responsif, dan ramah lingkungan.' },
+                        { name: 'Teknik Industri', description: 'Optimalisasi sistem produksi dan rantai pasok global.' },
+                        { name: 'Sistem Informasi', description: 'Analisis big data dan pengembangan aplikasi enterprise.' },
+                    ]},
+                    { id: 's2', label: 'Magister (S2)', programs: [
+                        { name: 'Teknik Sipil', description: 'Spesialisasi: Manajemen Konstruksi & Struktur Lanjut.' },
+                        { name: 'Teknik Elektro', description: 'Spesialisasi: Kecerdasan Buatan & Sistem Cerdas.' },
+                    ]},
+                    { id: 'profesi', label: 'Profesi', programs: [
+                        { name: 'Program Profesi Insinyur (PPI)', description: 'Jalur sertifikasi untuk insinyur profesional.' },
+                    ]},
+                    { id: 'rpl', label: 'RPL', programs: [
+                        { name: 'Rekognisi Pembelajaran Lampau (RPL)', description: 'Akselerasi gelar melalui pengakuan pengalaman kerja.' },
+                    ]},
+                ],
+            },
+            newsHighlights: {
+                heading: 'Berita & Sorotan Kampus',
+                items: [
+                    { title: 'Rektor ISTN Lakukan Kunjungan ke ITB untuk Kolaborasi Riset', date: '10 Nov 2025', category: 'Riset' },
+                    { title: 'ISTN Dorong Kedaulatan Digital Kesehatan Melalui Hackathon Nasional', date: '05 Nov 2025', category: 'Inovasi' },
+                    { title: 'ISTN Buka Peluang Magang di Jepang untuk 50 Mahasiswa Teknik', date: '01 Nov 2025', category: 'Internasional' },
+                    { title: 'Pengabdian Masyarakat: Instalasi Panel Surya di Desa Tertinggal', date: '25 Okt 2025', category: 'Pengmas' },
+                    { title: 'Mahasiswa Arsitektur ISTN Menangkan Sayembara Desain IKN', date: '20 Okt 2025', category: 'Prestasi' },
+                ],
+            },
+            partners: {
+                heading: 'ISTN Kampus Kolaborasi',
+                subtitle: 'ISTN x Industri: Menghubungkan akademik dengan kebutuhan nyata dunia kerja.',
+                collaborationText: 'Kami menjalin kemitraan strategis dengan lebih dari <strong>100 perusahaan terkemuka</strong> di sektor teknologi, manufaktur, energi, dan konstruksi. Kolaborasi ini mencakup riset bersama, program magang bersertifikat, dan penyerapan lulusan terbaik.',
+                logos: Array(8).fill(null).map((_, i) => ({ name: `Partner ${i + 1}` })),
+            },
+            alumniHighlights: {
+                heading: 'Kisah Sukses Alumni',
+                items: [
+                    { name: 'Dr. Ir. Afrianyah Noor', title: 'CEO & Founder TechMaju', quote: 'Pendidikan teknik yang solid dari ISTN menjadi fondasi utama kesuksesan saya di industri 4.0.' },
+                    { name: 'Dra. Rima Kusumawati', title: 'Pakar Tata Kota, BAPPENAS', quote: 'ISTN mengajarkan saya pentingnya desain yang berkelanjutan dan berpusat pada masyarakat.' },
+                    { name: 'Ir. Budi Santoso, M.Eng.', title: 'Chief Engineer, EnergyCorp', quote: 'Pengalaman lab dan riset di kampus sangat relevan dengan tantangan proyek energi besar.' },
+                ],
+            },
+            teaser: {
+                socialMedia: {
+                    heading: 'Ikuti Kami di Media Sosial',
+                    links: [
+                        { name: 'Instagram', icon: 'M16 11.37a4 4 0 11-8 0 4 4 0 018 0z' },
+                        { name: 'Facebook', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
+                        { name: 'YouTube', icon: 'M19.615 3.385a2.768 2.768 0 00-1.74-2.316C16.92 0 12 0 12 0s-4.92 0-5.875 1.069a2.769 2.769 0 00-1.74 2.316C4 5.378 4 12 4 12s0 6.622 1.069 8.615c.348.675.986 1.213 1.74 1.74C8.08 24 12 24 12 24s4.92 0 5.875-1.069a2.768 2.768 0 001.74-2.316C20 18.622 20 12 20 12s0-6.622-1.069-8.615zM9.545 15.5L14 12l-4.455-3.5v7z' },
+                    ],
+                },
+                podcastRadio: {
+                    heading: 'ISTN Radio & Podcast',
+                    subtitle: 'Dengarkan kisah inspiratif, riset terbaru, dan bincang karir.',
+                    ctaLabel: 'Dengarkan Sekarang',
+                    imageAlt: 'Mikrofon studio radio dengan headphone',
+                },
+            },
+            campusInfo: {
+                about: {
+                    heading: 'Tentang ISTN',
+                    vision: 'Menjadi perguruan tinggi unggulan yang menghasilkan lulusan berintegritas, inovatif, dan mampu bersaing secara global dalam bidang Sains dan Teknologi.',
+                    mission: [
+                        'Menyelenggarakan pendidikan berkualitas yang relevan dengan perkembangan industri dan teknologi 4.0.',
+                        'Melakukan penelitian dan pengabdian masyarakat yang berkontribusi pada solusi masalah nasional.',
+                        'Membangun jejaring kolaborasi strategis dengan industri, pemerintah, dan institusi internasional.',
+                    ],
+                },
+                address: {
+                    heading: 'Lokasi Kampus Utama',
+                    detail: 'Jl. Raya Modern No. 10, Jakarta Selatan, 12780. Indonesia.',
+                    mapsCta: 'Lihat di Google Maps',
+                },
+            },
+            academicCalendar: {
+                heading: 'Jangan Lewatkan Batas Waktu Penting',
+                subtitle: 'Akses Kalender Akademik terbaru untuk informasi registrasi, ujian, dan libur kuliah.',
+                ctaLabel: 'Cek Kalender Akademik',
+            },
+            footer: {
+                copyright: '© 2025 Institut Sains & Teknologi Modern. Hak Cipta Dilindungi.',
+            },
+        };
+
+        // Helper function for program tabs initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabGroups = document.querySelectorAll('[role="tablist"]');
+            tabGroups.forEach(tablist => {
+                const tabs = tablist.querySelectorAll('[role="tab"]');
+                const panels = document.querySelectorAll('[role="tabpanel"]');
+
+                const switchTab = (oldTab, newTab) => {
+                    oldTab.setAttribute('aria-selected', 'false');
+                    oldTab.setAttribute('tabIndex', '-1');
+                    oldTab.classList.remove('border-indigo-600', 'text-indigo-700');
+                    oldTab.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    
+                    newTab.setAttribute('aria-selected', 'true');
+                    newTab.setAttribute('tabIndex', '0');
+                    newTab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    newTab.classList.add('border-indigo-600', 'text-indigo-700');
+                    
+                    const oldPanel = document.getElementById(oldTab.getAttribute('aria-controls'));
+                    const newPanel = document.getElementById(newTab.getAttribute('aria-controls'));
+
+                    oldPanel.hidden = true;
+                    oldPanel.setAttribute('tabIndex', '-1');
+                    newPanel.hidden = false;
+                    newPanel.setAttribute('tabIndex', '0');
+
+                    newTab.focus();
+                };
+
+                tabs.forEach((tab, index) => {
+                    tab.addEventListener('click', (e) => {
+                        const currentActive = tablist.querySelector('[aria-selected="true"]');
+                        switchTab(currentActive, e.currentTarget);
+                    });
+
+                    tab.addEventListener('keydown', (e) => {
+                        let newIndex = index;
+                        const totalTabs = tabs.length;
+                        
+                        if (e.key === 'ArrowRight') {
+                            newIndex = (index + 1) % totalTabs;
+                        } else if (e.key === 'ArrowLeft') {
+                            newIndex = (index - 1 + totalTabs) % totalTabs;
+                        } else if (e.key === 'Home') {
+                            newIndex = 0;
+                        } else if (e.key === 'End') {
+                            newIndex = totalTabs - 1;
+                        } else {
+                            return;
+                        }
+
+                        e.preventDefault();
+                        const currentActive = tablist.querySelector('[aria-selected="true"]');
+                        switchTab(currentActive, tabs[newIndex]);
+                    });
+                });
+            });
+
+            // Mobile Menu Toggle
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+                    menuButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden', isExpanded);
+                });
+                // Close menu on link click
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        menuButton.setAttribute('aria-expanded', 'false');
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
+            // Sticky Header Logic
+            const header = document.querySelector('header');
+            const handleScroll = () => {
+                if (window.scrollY > 0) {
+                    header.classList.add('bg-white/95', 'shadow-lg', 'backdrop-blur-sm');
+                    header.classList.remove('bg-white');
+                } else {
+                    header.classList.remove('bg-white/95', 'shadow-lg', 'backdrop-blur-sm');
+                    header.classList.add('bg-white');
+                }
+            };
+            window.addEventListener('scroll', handleScroll);
+
+            // Carousel Logic (Vanilla JS)
+            document.querySelectorAll('.js-carousel').forEach(carouselElement => {
+                const track = carouselElement.querySelector('.js-carousel-track');
+                const slides = carouselElement.querySelectorAll('.js-carousel-slide');
+                const prevButton = carouselElement.querySelector('.js-carousel-prev');
+                const nextButton = carouselElement.querySelector('.js-carousel-next');
+                const indicatorsContainer = carouselElement.querySelector('.js-carousel-indicators');
+                const totalSlides = slides.length;
+                let currentIndex = 0;
+                let intervalId;
+                let isPaused = false;
+                
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                const updateCarousel = () => {
+                    // Apply transition based on motion preference
+                    if (prefersReducedMotion) {
+                        track.style.transition = 'none';
+                    } else {
+                        track.style.transition = 'transform 0.5s ease-in-out';
+                    }
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                    // Update indicators
+                    indicatorsContainer.querySelectorAll('button').forEach((btn, index) => {
+                        btn.classList.remove('bg-white', 'shadow-md');
+                        btn.classList.add('bg-white/50', 'hover:bg-white/80');
+                        if (index === currentIndex) {
+                            btn.classList.add('bg-white', 'shadow-md');
+                            btn.classList.remove('bg-white/50', 'hover:bg-white/80');
+                        }
+                    });
+                };
+
+                const startAutoScroll = (interval) => {
+                    if (intervalId) clearInterval(intervalId);
+                    if (isPaused || totalSlides < 2) return;
+                    intervalId = setInterval(() => {
+                        currentIndex = (currentIndex + 1) % totalSlides;
+                        updateCarousel();
+                    }, interval);
+                };
+                
+                const pauseAutoScroll = () => {
+                    isPaused = true;
+                    if (intervalId) clearInterval(intervalId);
+                };
+
+                const resumeAutoScroll = (interval) => {
+                    isPaused = false;
+                    startAutoScroll(interval);
+                };
+
+                const goToSlide = (index) => {
+                    pauseAutoScroll();
+                    currentIndex = index;
+                    updateCarousel();
+                    resumeAutoScroll(parseInt(carouselElement.dataset.interval) || 5000); // Resume with its set interval
+                };
+
+                // Event Listeners
+                if (prevButton) prevButton.addEventListener('click', () => goToSlide((currentIndex - 1 + totalSlides) % totalSlides));
+                if (nextButton) nextButton.addEventListener('click', () => goToSlide((currentIndex + 1) % totalSlides));
+                
+                indicatorsContainer.querySelectorAll('button').forEach((btn, index) => {
+                    btn.addEventListener('click', () => goToSlide(index));
+                });
+
+                carouselElement.addEventListener('mouseenter', pauseAutoScroll);
+                carouselElement.addEventListener('mouseleave', () => resumeAutoScroll(parseInt(carouselElement.dataset.interval) || 5000));
+                carouselElement.addEventListener('focusin', pauseAutoScroll);
+                carouselElement.addEventListener('focusout', () => resumeAutoScroll(parseInt(carouselElement.dataset.interval) || 5000));
+
+
+                // Initial setup and auto-scroll start
+                if (carouselElement.dataset.autoScroll === 'true') {
+                    startAutoScroll(parseInt(carouselElement.dataset.interval) || 5000);
+                }
+                updateCarousel(); 
+            });
+        });
+    </script>
+
+    <div class="bg-gray-900 hidden lg:block" aria-label="Informasi Kontak dan Akses Cepat">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2 flex justify-between items-center text-sm">
+            <div class="flex space-x-6 text-gray-400">
+                <a href="mailto:info@istmodern.ac.id" class="hover:text-white transition duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+                    Email: **info@istmodern.ac.id**
+                </a>
+                <a href="tel:02112345678" class="hover:text-white transition duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded">
+                    Telp: **(021) 1234 5678**
+                </a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="##" class="text-gray-400 hover:text-white transition duration-200 font-medium text-xs rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                    Aplikasi Internal
+                </a>
+                <a href="##" class="text-gray-400 hover:text-white transition duration-200 font-medium text-xs rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                    EN | **ID**
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-50 transition-shadow duration-300 bg-white" role="banner">
+        <a href="#main-content" class="sr-only skip-link absolute top-0 left-0 bg-indigo-600 text-white p-3 z-[9999] rounded-br-lg">
+            Loncat ke Konten Utama
+        </a>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 lg:py-3">
+            <nav class="flex justify-between items-center" aria-label="Navigasi Utama">
+                <a href="#beranda" class="text-2xl font-black text-gray-900 tracking-tight flex items-center focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded" aria-label="Beranda Institut Sains & Teknologi Modern">
+                    <span class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-2 rounded-lg mr-2 inline-block">IST</span>
+                    <span class="hidden sm:inline">Modern</span>
+                </a>
+
+                <div class="hidden lg:flex lg:items-center lg:space-x-8 xl:space-x-10">
+                    <a href="#beranda" class="text-base font-medium text-gray-700 hover:text-indigo-600 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Beranda</a>
+                    <a href="#program-studi" class="text-base font-medium text-gray-700 hover:text-indigo-600 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Program Studi</a>
+                    <a href="##" target="_blank" rel="noopener noreferrer" class="text-base font-medium text-gray-700 hover:text-indigo-600 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Beasiswa</a>
+                    <a href="##" target="_blank" rel="noopener noreferrer" class="text-base font-medium text-gray-700 hover:text-indigo-600 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Karir</a>
+                    <a href="#tentang-kami" class="text-base font-medium text-gray-700 hover:text-indigo-600 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Tentang Kami</a>
+                    <a href="#alumni" class="text-base font-medium text-gray-700 hover:text-indigo-600 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Alumni</a>
+                    <a href="#berita" class="text-base font-medium text-gray-700 hover:text-indigo-600 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Berita</a>
+                    <a href="#kolaborasi-strategis" class="text-base font-medium text-gray-700 hover:text-indigo-600 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Kolaborasi Strategis</a>
+                </div>
+
+                <div class="hidden lg:block">
+                    <a href="##" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-xl transition duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 text-white bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 focus:ring-indigo-500/50 shadow-lg shadow-indigo-500/30" aria-label="Daftar Sekarang">
+                        Daftar
+                    </a>
+                </div>
+
+                <button type="button" id="mobile-menu-button" class="lg:hidden p-2 text-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka menu navigasi">
+                    <svg class="h-6 w-6 menu-icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg class="h-6 w-6 menu-icon-close hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </nav>
+        </div>
+
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100 pb-4" role="menu">
+            <div class="pt-2 pb-3 px-2 space-y-1">
+                <a href="#beranda" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Beranda</a>
+                <a href="#program-studi" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Program Studi</a>
+                <a href="##" target="_blank" rel="noopener noreferrer" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Beasiswa</a>
+                <a href="##" target="_blank" rel="noopener noreferrer" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Karir</a>
+                <a href="#tentang-kami" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Tentang Kami</a>
+                <a href="#alumni" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Alumni</a>
+                <a href="#berita" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Berita</a>
+                <a href="#kolaborasi-strategis" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Kolaborasi Strategis</a>
+                <a href="##" target="_blank" rel="noopener noreferrer" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">TDC</a>
+                <a href="##" target="_blank" rel="noopener noreferrer" role="menuitem" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">Kemahasiswaan</a>
+                <a href="##" role="menuitem" class="mt-4 block px-3 py-2 rounded-md text-base font-medium bg-indigo-50 text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">Daftar</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" role="main" class="pt-10 sm:pt-16 lg:pt-24 bg-white">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+                <div class="lg:col-span-6 xl:col-span-5">
+                    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 mb-4">Inovasi, Teknologi, & Keberlanjutan</span>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight">
+                        Mencetak Insinyur dan Saintis Unggul Masa Depan
+                    </h1>
+                    <p class="mt-4 text-xl text-gray-600 max-w-lg">
+                        Wujudkan potensi Anda di kampus yang berfokus pada <strong>inovasi, teknologi, dan keberlanjutan.</strong>
+                    </p>
+
+                    <div class="mt-8 flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
+                        <a href="##" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl transition duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 text-white bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 focus:ring-indigo-500/50 shadow-lg shadow-indigo-500/30" aria-label="Daftar Sekarang">
+                            Daftar Sekarang
+                        </a>
+                        <a href="#program-studi" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-xl transition duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 text-gray-700 bg-white hover:bg-gray-50 focus:ring-gray-400" aria-label="Jelajahi Program Studi">
+                            Jelajahi Program Studi
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-12 lg:mt-0 lg:col-span-6 xl:col-span-7">
+                    <img
+                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2YwZjBmMCIvPjxwYXRoIGQ9Ik00MDAgMTUwTDYwMCA0NTBIMjAwTDQwMCAxNTBaIiBmaWxsPSIjN2Y5YmRmIi8+PHJlY3QgeD0iMzUwIiB5PSI0NTAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMmEzYjRmIi8+PHRleHQgeD0iNDAwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJTYW5zLXNlcmlmIiBmb250LXNpemU9IjMwIiBmaWxsPSIjMzMzIj48dHNwYW4geD0iNDAwIiB5PSIyNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkthbXB1cyBNb2Rlcm48L3RzcGFuPjx0c3BhbiB4PSI0MDAiIHk9IjMwNSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UGxhY2Vob2xkZXI8L3RzcGFuPjwvdGV4dD48L3N2Zz4="
+                        alt="Gedung kampus modern dengan arsitektur futuristik di tengah taman hijau."
+                        class="w-full h-auto object-cover rounded-2xl shadow-2xl shadow-indigo-500/20"
+                        loading="eager"
+                        width="800"
+                        height="600"
+                    />
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="program-studi" class="py-16 sm:py-24 bg-gray-50" aria-labelledby="program-studi-heading">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 id="program-studi-heading" class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight text-center">
+                Program Studi Modern & Relevan
+            </h2>
+            <p class="mt-4 mb-12 text-xl text-gray-600 text-center max-w-3xl mx-auto">
+                Pilih jalur pendidikan yang paling sesuai dengan ambisi karir dan latar belakang Anda.
+            </p>
+
+            <div>
+                <div class="border-b border-gray-200">
+                    <div role="tablist" aria-label="Program Studi Kategori" class="flex flex-wrap -mb-px space-x-4 sm:space-x-8">
+                        <button
+                            type="button" role="tab" id="tab-s1" aria-controls="panel-s1" aria-selected="true" tabindex="0"
+                            class="py-3 px-1.5 sm:px-4 text-sm sm:text-base font-medium whitespace-nowrap transition-colors duration-300 border-b-2 border-indigo-600 text-indigo-700"
+                        >Sarjana (S1)</button>
+                        <button
+                            type="button" role="tab" id="tab-s2" aria-controls="panel-s2" aria-selected="false" tabindex="-1"
+                            class="py-3 px-1.5 sm:px-4 text-sm sm:text-base font-medium whitespace-nowrap transition-colors duration-300 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                        >Magister (S2)</button>
+                        <button
+                            type="button" role="tab" id="tab-profesi" aria-controls="panel-profesi" aria-selected="false" tabindex="-1"
+                            class="py-3 px-1.5 sm:px-4 text-sm sm:text-base font-medium whitespace-nowrap transition-colors duration-300 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                        >Profesi</button>
+                        <button
+                            type="button" role="tab" id="tab-rpl" aria-controls="panel-rpl" aria-selected="false" tabindex="-1"
+                            class="py-3 px-1.5 sm:px-4 text-sm sm:text-base font-medium whitespace-nowrap transition-colors duration-300 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                        >RPL</button>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <div role="tabpanel" id="panel-s1" aria-labelledby="tab-s1" tabindex="0">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Teknik Sipil</h3>
+                                <p class="text-gray-600 mt-1">Fokus pada infrastruktur berkelanjutan dan mitigasi bencana.</p>
+                                <a href="##" aria-label="Detail program Teknik Sipil" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Teknik Elektro</h3>
+                                <p class="text-gray-600 mt-1">Pengembangan sistem energi terbarukan dan otomasi industri.</p>
+                                <a href="##" aria-label="Detail program Teknik Elektro" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Teknik Mesin</h3>
+                                <p class="text-gray-600 mt-1">Perancangan dan manufaktur presisi berbasis digital.</p>
+                                <a href="##" aria-label="Detail program Teknik Mesin" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Arsitektur</h3>
+                                <p class="text-gray-600 mt-1">Desain bangunan cerdas, responsif, dan ramah lingkungan.</p>
+                                <a href="##" aria-label="Detail program Arsitektur" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Teknik Industri</h3>
+                                <p class="text-gray-600 mt-1">Optimalisasi sistem produksi dan rantai pasok global.</p>
+                                <a href="##" aria-label="Detail program Teknik Industri" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Sistem Informasi</h3>
+                                <p class="text-gray-600 mt-1">Analisis big data dan pengembangan aplikasi enterprise.</p>
+                                <a href="##" aria-label="Detail program Sistem Informasi" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" id="panel-s2" aria-labelledby="tab-s2" hidden tabindex="-1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Teknik Sipil</h3>
+                                <p class="text-gray-600 mt-1">Spesialisasi: Manajemen Konstruksi & Struktur Lanjut.</p>
+                                <a href="##" aria-label="Detail program Teknik Sipil (S2)" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Teknik Elektro</h3>
+                                <p class="text-gray-600 mt-1">Spesialisasi: Kecerdasan Buatan & Sistem Cerdas.</p>
+                                <a href="##" aria-label="Detail program Teknik Elektro (S2)" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div role="tabpanel" id="panel-profesi" aria-labelledby="tab-profesi" hidden tabindex="-1">
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Program Profesi Insinyur (PPI)</h3>
+                                <p class="text-gray-600 mt-1">Jalur sertifikasi untuk insinyur profesional.</p>
+                                <a href="##" aria-label="Detail program Profesi Insinyur" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" id="panel-rpl" aria-labelledby="tab-rpl" hidden tabindex="-1">
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 flex flex-col">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Rekognisi Pembelajaran Lampau (RPL)</h3>
+                                <p class="text-gray-600 mt-1">Akselerasi gelar melalui pengakuan pengalaman kerja.</p>
+                                <a href="##" aria-label="Detail program RPL" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium self-start">Detail Program &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="berita" class="py-16 sm:py-24 bg-white" aria-labelledby="berita-heading">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-10">
+                <h2 id="berita-heading" class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">Berita & Sorotan Kampus</h2>
+                <a href="##" class="text-indigo-600 hover:text-indigo-800 font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+                    Lihat Semua Berita &rarr;
+                </a>
+            </div>
+
+            <div class="relative overflow-hidden group h-[450px] sm:h-[350px] js-carousel" data-auto-scroll="true" data-interval="5000" role="region" aria-label="Karosel Berita dan Sorotan" tabindex="0">
+                <div class="flex h-full js-carousel-track">
+                    
+                    <div class="flex-shrink-0 w-full h-full p-2 js-carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                        <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 h-full flex flex-col justify-between" role="article">
+                            <div>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">Riset</span>
+                                <h3 class="mt-3 text-xl font-semibold text-gray-900 line-clamp-2">
+                                    <a href="##" aria-label="Baca berita: Rektor ISTN Lakukan Kunjungan ke ITB untuk Kolaborasi Riset" class="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+                                        Rektor ISTN Lakukan Kunjungan ke ITB untuk Kolaborasi Riset
+                                    </a>
+                                </h3>
+                                <p class="mt-2 text-gray-600 text-sm line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <time datetime="2025-11-10">10 Nov 2025</time>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-full h-full p-2 js-carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                        <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 h-full flex flex-col justify-between" role="article">
+                            <div>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">Inovasi</span>
+                                <h3 class="mt-3 text-xl font-semibold text-gray-900 line-clamp-2">
+                                    <a href="##" aria-label="Baca berita: ISTN Dorong Kedaulatan Digital Kesehatan Melalui Hackathon Nasional" class="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+                                        ISTN Dorong Kedaulatan Digital Kesehatan Melalui Hackathon Nasional
+                                    </a>
+                                </h3>
+                                <p class="mt-2 text-gray-600 text-sm line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <time datetime="2025-11-05">05 Nov 2025</time>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-shrink-0 w-full h-full p-2 js-carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                        <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 h-full flex flex-col justify-between" role="article">
+                            <div>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">Internasional</span>
+                                <h3 class="mt-3 text-xl font-semibold text-gray-900 line-clamp-2">
+                                    <a href="##" aria-label="Baca berita: ISTN Buka Peluang Magang di Jepang untuk 50 Mahasiswa Teknik" class="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+                                        ISTN Buka Peluang Magang di Jepang untuk 50 Mahasiswa Teknik
+                                    </a>
+                                </h3>
+                                <p class="mt-2 text-gray-600 text-sm line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <time datetime="2025-11-01">01 Nov 2025</time>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-full h-full p-2 js-carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                        <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 h-full flex flex-col justify-between" role="article">
+                            <div>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">Pengmas</span>
+                                <h3 class="mt-3 text-xl font-semibold text-gray-900 line-clamp-2">
+                                    <a href="##" aria-label="Baca berita: Pengabdian Masyarakat: Instalasi Panel Surya di Desa Tertinggal" class="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+                                        Pengabdian Masyarakat: Instalasi Panel Surya di Desa Tertinggal
+                                    </a>
+                                </h3>
+                                <p class="mt-2 text-gray-600 text-sm line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <time datetime="2025-10-25">25 Okt 2025</time>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-shrink-0 w-full h-full p-2 js-carousel-slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                        <div class="bg-white shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 h-full flex flex-col justify-between" role="article">
+                            <div>
+                                <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">Prestasi</span>
+                                <h3 class="mt-3 text-xl font-semibold text-gray-900 line-clamp-2">
+                                    <a href="##" aria-label="Baca berita: Mahasiswa Arsitektur ISTN Menangkan Sayembara Desain IKN" class="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">
+                                        Mahasiswa Arsitektur ISTN Menangkan Sayembara Desain IKN
+                                    </a>
+                                </h3>
+                                <p class="mt-2 text-gray-600 text-sm line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <time datetime="2025-10-20">20 Okt 2025</time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="absolute top-1/2 left-4 -translate-y-1/2 p-2 bg-white/70 hover:bg-white rounded-full shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-offset-2 js-carousel-prev" aria-label="Slide Sebelumnya">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+
+                <button class="absolute top-1/2 right-4 -translate-y-1/2 p-2 bg-white/70 hover:bg-white rounded-full shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-offset-2 js-carousel-next" aria-label="Slide Selanjutnya">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 js-carousel-indicators">
+                    <button aria-label="Pindah ke slide 1" class="w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 bg-white shadow-md"></button>
+                    <button aria-label="Pindah ke slide 2" class="w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 bg-white/50 hover:bg-white/80"></button>
+                    <button aria-label="Pindah ke slide 3" class="w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 bg-white/50 hover:bg-white/80"></button>
+                    <button aria-label="Pindah ke slide 4" class="w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 bg-white/50 hover:bg-white/80"></button>
+                    <button aria-label="Pindah ke slide 5" class="w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 bg-white/50 hover:bg-white/80"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kolaborasi-strategis" class="py-16 sm:py-24 bg-gray-50" aria-labelledby="kolaborasi-heading">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 id="kolaborasi-heading" class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight text-center">
+                ISTN Kampus Kolaborasi
+            </h2>
+            <p class="mt-3 text-xl text-gray-600 text-center">ISTN x Industri: Menghubungkan akademik dengan kebutuhan nyata dunia kerja.</p>
+
+            <div class="mt-10 lg:grid lg:grid-cols-3 lg:gap-12 items-center">
+                <div class="lg:col-span-1 mb-8 lg:mb-0">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Kami menjalin kemitraan strategis dengan lebih dari <strong>100 perusahaan terkemuka</strong> di sektor teknologi, manufaktur, energi, dan konstruksi. Kolaborasi ini mencakup riset bersama, program magang bersertifikat, dan penyerapan lulusan terbaik.
+                    </p>
+                    <a href="##" class="inline-flex items-center justify-center px-6 py-3 border border-indigo-500 text-base font-medium rounded-xl transition duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 text-indigo-600 bg-white hover:bg-indigo-50 focus:ring-indigo-500 mt-6" aria-label="Detail Kolaborasi">
+                        Pelajari Kemitraan Kami
+                    </a>
+                </div>
+
+                <div class="lg:col-span-2 mt-12">
+                    <div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-4">
+                        <div class="col-span-1 flex justify-center py-4 px-2">
+                            <div class="w-full max-w-[120px] h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 font-semibold text-sm opacity-80 hover:opacity-100 transition-opacity" aria-label="Logo Mitra: Partner 1">Partner 1</div>
+                        </div>
+                        <div class="col-span-1 flex justify-center py-4 px-2">
+                            <div class="w-full max-w-[120px] h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 font-semibold text-sm opacity-80 hover:opacity-100 transition-opacity" aria-label="Logo Mitra: Partner 2">Partner 2</div>
+                        </div>
+                        <div class="col-span-1 flex justify-center py-4 px-2">
+                            <div class="w-full max-w-[120px] h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 font-semibold text-sm opacity-80 hover:opacity-100 transition-opacity" aria-label="Logo Mitra: Partner 3">Partner 3</div>
+                        </div>
+                        <div class="col-span-1 flex justify-center py-4 px-2">
+                            <div class="w-full max-w-[120px] h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 font-semibold text-sm opacity-80 hover:opacity-100 transition-opacity" aria-label="Logo Mitra: Partner 4">Partner 4</div>
+                        </div>
+                        <div class="col-span-1 flex justify-center py-4 px-2">
+                            <div class="w-full max-w-[120px] h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 font-semibold text-sm opacity-80 hover:opacity-100 transition-opacity" aria-label="Logo Mitra: Partner 5">Partner 5</div>
+                        </div>
+                        <div class="col-span-1 flex justify-center py-4 px-2">
+                            <div class="w-full max-w-[120px] h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 font-semibold text-sm opacity-80 hover:opacity-100 transition-opacity" aria-label="Logo Mitra: Partner 6">Partner 6</div>
+                        </div>
+                        <div class="col-span-1 flex justify-center py-4 px-2">
+                            <div class="w-full max-w-[120px] h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 font-semibold text-sm opacity-80 hover:opacity-100 transition-opacity" aria-label="Logo Mitra: Partner 7">Partner 7</div>
+                        </div>
+                        <div class="col-span-1 flex justify-center py-4 px-2">
+                            <div class="w-full max-w-[120px] h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 font-semibold text-sm opacity-80 hover:opacity-100 transition-opacity" aria-label="Logo Mitra: Partner 8">Partner 8</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="alumni" class="py-16 sm:py-24 bg-white" aria-labelledby="alumni-heading">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 id="alumni-heading" class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight text-center">
+                Kisah Sukses Alumni
+            </h2>
+            <p class="mt-4 mb-12 text-xl text-gray-600 text-center">
+                Inilah alumni kami yang sukses berkontribusi di berbagai sektor industri dan pemerintahan.
+            </p>
+
+            <div class="relative overflow-hidden group h-[300px] sm:h-[250px] lg:h-[220px] js-carousel" data-auto-scroll="true" data-interval="7000" role="region" aria-label="Karosel Kisah Sukses Alumni" tabindex="0">
+                <div class="flex h-full js-carousel-track">
+                    
+                    <div class="flex-shrink-0 w-full h-full p-2 js-carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+                        <div class="bg-indigo-50 border-t-4 border-indigo-600 shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 h-full flex flex-col justify-between">
+                            <blockquote class="italic text-gray-800 text-lg leading-relaxed">
+                                &ldquo;Pendidikan teknik yang solid dari ISTN menjadi fondasi utama kesuksesan saya di industri 4.0.&rdquo;
+                            </blockquote>
+                            <footer class="mt-6 pt-4 border-t border-indigo-200">
+                                <p class="font-semibold text-gray-900">Dr. Ir. Afrianyah Noor</p>
+                                <p class="text-sm text-indigo-600">CEO & Founder TechMaju</p>
+                            </footer>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 w-full h-full p-2 js-carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+                        <div class="bg-indigo-50 border-t-4 border-indigo-600 shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 h-full flex flex-col justify-between">
+                            <blockquote class="italic text-gray-800 text-lg leading-relaxed">
+                                &ldquo;ISTN mengajarkan saya pentingnya desain yang berkelanjutan dan berpusat pada masyarakat.&rdquo;
+                            </blockquote>
+                            <footer class="mt-6 pt-4 border-t border-indigo-200">
+                                <p class="font-semibold text-gray-900">Dra. Rima Kusumawati</p>
+                                <p class="text-sm text-indigo-600">Pakar Tata Kota, BAPPENAS</p>
+                            </footer>
+                        </div>
+                    </div>
+
+                    <div class="flex-shrink-0 w-full h-full p-2 js-carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+                        <div class="bg-indigo-50 border-t-4 border-indigo-600 shadow-xl hover:shadow-2xl transition duration-300 rounded-2xl p-6 h-full flex flex-col justify-between">
+                            <blockquote class="italic text-gray-800 text-lg leading-relaxed">
+                                &ldquo;Pengalaman lab dan riset di kampus sangat relevan dengan tantangan proyek energi besar.&rdquo;
+                            </blockquote>
+                            <footer class="mt-6 pt-4 border-t border-indigo-200">
+                                <p class="font-semibold text-gray-900">Ir. Budi Santoso, M.Eng.</p>
+                                <p class="text-sm text-indigo-600">Chief Engineer, EnergyCorp</p>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="absolute top-1/2 left-4 -translate-y-1/2 p-2 bg-white/70 hover:bg-white rounded-full shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-offset-2 js-carousel-prev" aria-label="Slide Sebelumnya">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+
+                <button class="absolute top-1/2 right-4 -translate-y-1/2 p-2 bg-white/70 hover:bg-white rounded-full shadow-lg text-gray-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-offset-2 js-carousel-next" aria-label="Slide Selanjutnya">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 js-carousel-indicators">
+                    <button aria-label="Pindah ke slide 1" class="w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 bg-white shadow-md"></button>
+                    <button aria-label="Pindah ke slide 2" class="w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 bg-white/50 hover:bg-white/80"></button>
+                    <button aria-label="Pindah ke slide 3" class="w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 bg-white/50 hover:bg-white/80"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 sm:py-24 bg-white border-t border-gray-100" aria-label="Media dan Komunikasi Kampus">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-inner" role="complementary">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Ikuti Kami di Media Sosial</h3>
+                    <div class="flex space-x-6">
+                        <a href="##" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-indigo-600 transition duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500 rounded-full p-2" aria-label="Ikuti kami di Instagram">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11.37a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                        </a>
+                        <a href="##" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-indigo-600 transition duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500 rounded-full p-2" aria-label="Ikuti kami di Facebook">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" /></svg>
+                        </a>
+                        <a href="##" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-indigo-600 transition duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500 rounded-full p-2" aria-label="Ikuti kami di YouTube">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.385a2.768 2.768 0 00-1.74-2.316C16.92 0 12 0 12 0s-4.92 0-5.875 1.069a2.769 2.769 0 00-1.74 2.316C4 5.378 4 12 4 12s0 6.622 1.069 8.615c.348.675.986 1.213 1.74 1.74C8.08 24 12 24 12 24s4.92 0 5.875-1.069a2.768 2.768 0 001.74-2.316C20 18.622 20 12 20 12s0-6.622-1.069-8.615zM9.545 15.5L14 12l-4.455-3.5v7z" /></svg>
+                        </a>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600">
+                        Ikuti kegiatan terbaru dan informasi penting kampus kami secara real-time.
+                    </p>
+                </div>
+
+                <div class="bg-indigo-700 rounded-2xl p-8 text-white shadow-xl flex items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">ISTN Radio & Podcast</h3>
+                        <p class="text-indigo-200 mb-6">Dengarkan kisah inspiratif, riset terbaru, dan bincang karir.</p>
+                        <a href="##" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl transition duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 bg-white text-indigo-700 hover:bg-indigo-50 focus:ring-white" aria-label="Dengarkan Sekarang">
+                            Dengarkan Sekarang
+                        </a>
+                    </div>
+                    <div class="hidden sm:block">
+                        <img
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0iI2FjYnVmYiIvPjxwYXRoIGQ9Ik01MCAzMCBDNTUgMjAgNjAgMjAgNjUgMzAgTDUwIDgwIEwzNSA1NSBMNDAgNTUgTDUwIDgwIEw2NSA1NSBMNjAgNTUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=="
+                            alt="Mikrofon studio radio dengan headphone"
+                            class="w-24 h-24 object-contain opacity-80"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tentang-kami" class="py-16 sm:py-24 bg-white" aria-labelledby="about-heading">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-2" role="complementary">
+                    <h2 id="about-heading" class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">Tentang ISTN</h2>
+                    <div class="mt-8 space-y-8">
+                        <div class="bg-indigo-50 shadow-lg hover:shadow-2xl transition duration-300 rounded-2xl p-6">
+                            <h4 class="text-xl font-bold text-indigo-700 mb-2">Visi</h4>
+                            <p class="text-gray-700">Menjadi perguruan tinggi unggulan yang menghasilkan lulusan berintegritas, inovatif, dan mampu bersaing secara global dalam bidang Sains dan Teknologi.</p>
+                        </div>
+                        <div class="bg-white shadow-lg hover:shadow-2xl transition duration-300 rounded-2xl p-6 border border-gray-200">
+                            <h4 class="text-xl font-bold text-gray-900 mb-4">Misi</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                                <li>Menyelenggarakan pendidikan berkualitas yang relevan dengan perkembangan industri dan teknologi 4.0.</li>
+                                <li>Melakukan penelitian dan pengabdian masyarakat yang berkontribusi pada solusi masalah nasional.</li>
+                                <li>Membangun jejaring kolaborasi strategis dengan industri, pemerintah, dan institusi internasional.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1" role="region" aria-labelledby="address-heading">
+                    <h2 id="address-heading" class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">Lokasi Kampus Utama</h2>
+                    <div class="mt-8 bg-white shadow-lg hover:shadow-2xl transition duration-300 rounded-2xl p-6 border border-gray-200">
+                        <p class="text-lg font-medium text-gray-900 mb-4">Jl. Raya Modern No. 10, Jakarta Selatan, 12780. Indonesia.</p>
+                        <div class="h-48 w-full bg-gray-200 rounded-xl overflow-hidden mb-4 flex items-center justify-center text-gray-500 font-semibold" aria-label="Visualisasi peta lokasi kampus">
+                            
+                        </div>
+                        <a href="##" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl transition duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 text-white bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 focus:ring-indigo-500/50 shadow-lg shadow-indigo-500/30 w-full" aria-label="Lihat di Google Maps">
+                            Lihat di Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-900 py-16" aria-labelledby="calendar-heading">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 id="calendar-heading" class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Jangan Lewatkan Batas Waktu Penting
+                </h2>
+                <p class="mt-4 text-xl text-indigo-200">Akses Kalender Akademik terbaru untuk informasi registrasi, ujian, dan libur kuliah.</p>
+                <a href="##" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl transition duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 bg-white text-gray-900 hover:bg-gray-100 focus:ring-white mt-8" aria-label="Cek Kalender Akademik">
+                    Cek Kalender Akademik
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 pt-16 pb-8" role="contentinfo">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5 text-sm">
+                <div class="col-span-2 md:col-span-1 lg:col-span-2">
+                    <a href="#beranda" class="text-2xl font-black text-white tracking-tight flex items-center" aria-label="Beranda Institut Sains & Teknologi Modern">
+                        <span class="bg-gradient-to-r from-blue-600 to-indigo-700 p-2 rounded-lg mr-2 inline-block">IST</span>
+                        <span>Modern</span>
+                    </a>
+                    <p class="mt-4 text-gray-400 max-w-xs">
+                        Membangun masa depan melalui inovasi dan pendidikan berbasis teknologi unggulan.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-base font-semibold text-white tracking-wider uppercase">Kampus</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#beranda" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Beranda</a></li>
+                        <li><a href="#program-studi" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Program Studi</a></li>
+                        <li><a href="##" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Beasiswa</a></li>
+                        <li><a href="##" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Karir</a></li>
+                        <li><a href="##" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Daftar</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-base font-semibold text-white tracking-wider uppercase">Akademik</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#tentang-kami" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Tentang Kami</a></li>
+                        <li><a href="#alumni" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Alumni</a></li>
+                        <li><a href="#berita" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Berita</a></li>
+                        <li><a href="#kolaborasi-strategis" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Kolaborasi Strategis</a></li>
+                        <li><a href="##" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">TDC</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-base font-semibold text-white tracking-wider uppercase">Lainnya</h3>
+                    <ul class="space-y-3">
+                        <li><a href="##" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Kemahasiswaan</a></li>
+                        <li><a href="##" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Laporan Tahunan</a></li>
+                        <li><a href="##" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Aplikasi Internal</a></li>
+                        <li><a href="##" class="text-gray-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded">Kalender Akademik</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center">
+                <p class="text-sm text-gray-500">© 2025 Institut Sains & Teknologi Modern. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
